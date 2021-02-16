@@ -9,6 +9,8 @@ import (
 	"time"
 )
 
+// TODO: come back and do with structs
+
 // create type 'deck,' a slice of strings. from oop perspective, this type extends the props of a slice of strings
 type deck []string
 
