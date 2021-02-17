@@ -9,22 +9,27 @@ import (
 	"time"
 )
 
-// TODO: come back and do with structs
+// create type 'deck,' a slice of cards
+type card struct {
+	value string
+	suit  string
+}
 
-// create type 'deck,' a slice of strings. from oop perspective, this type extends the props of a slice of strings
-type deck []string
+type deck []card
 
 func newDeck() deck {
-	cards := deck{}
+	d := deck{}
 	suits := []string{"Spades", "Clubs", "Hearts", "Diamonds"}
 	values := []string{"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"}
 
 	for _, suit := range suits {
 		for _, value := range values {
-			cards = append(cards, value+" of "+suit)
+			d = append(d, card{value: value,
+				suit: suit,
+			})
 		}
 	}
-	return cards
+	return d
 }
 
 // 'receiver' comes before func name.
@@ -40,7 +45,11 @@ func deal(d deck, numOfCards int) (deck, deck) {
 }
 
 func (d deck) toString() string {
-	return strings.Join([]string(d), ",") // make slice of type string, join to comma-sep string
+	var deckString []string
+	for _, val := range d {
+		deckString = append(deckString, string(val.value+" of "+val.suit))
+	}
+	return strings.Join([]string(deckString), ",") // make slice of type string, join to comma-sep string
 }
 
 func (d deck) saveToFile(filename string) error {
@@ -48,14 +57,22 @@ func (d deck) saveToFile(filename string) error {
 }
 
 func newDeckFromFile(filename string) deck {
-	bs, err := ioutil.ReadFile(filename)
+	byteStr, err := ioutil.ReadFile(filename)
 
 	if err != nil {
 		// error!
 		fmt.Println("Error encountered in newDeckFromFile: ", err)
 		os.Exit(1) // any non-zero is not a success
 	}
-	return deck(strings.Split(string(bs), ","))
+
+	deckString := strings.Split(string(byteStr), ",")
+	newDeck := deck{}
+	for _, val := range deckString {
+		c := strings.Split(val, " of ")
+		newDeck = append(newDeck, card{value: c[0], suit: c[1]})
+
+	}
+	return newDeck
 }
 
 func (d deck) shuffle() {

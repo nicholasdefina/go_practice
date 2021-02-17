@@ -3,17 +3,13 @@ package main
 func main() {
 	// cards := newDeck()
 	// cards.shuffle()
-	// cards.print()
 
-	charles := person{
-		firstName: "Charles",
-		lastName:  "Xavier",
-		contactInfo: contactInfo{
-			email: "chaaaaaaaarles@hotmail.com",
-			phone: 18005555555,
-		},
-	}
+	// charles := createPerson("Charles", "Xavier", "charrruls@hotmail.com", 18005555555)
+	// cPointer := &charles // & operator: grabs the memory address of the value variable is pointing at
+	// charles.updateFirstName("Jorge") // can shorthand the pointer like this. receiver function can accept pointer to person or a person
+	// charles.print()
 
-	charles.updateFirstName("Jorge")
-	charles.print()
+	// colors := createColorsMap()
+	// fmt.Println(colors)
+	// printColors(colors)
 }

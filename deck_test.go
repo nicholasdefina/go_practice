@@ -12,12 +12,13 @@ func TestNewDeck(t *testing.T) {
 		t.Errorf("Expected deck length of 52 but got: %v", len(d))
 	}
 
-	if d[0] != "Ace of Spades" {
-		t.Errorf("Expected first card to be Ace of Spades but got: %v", d[0])
+	firstCard := d[0]
+	if firstCard.suit != "Spades" || firstCard.value != "Ace" {
+		t.Errorf("Expected first card to be Ace of Spades but got: %v", firstCard)
 	}
-
-	if d[len(d)-1] != "King of Diamonds" {
-		t.Errorf("Expected first card to be King of Diamonds but got: %v", d[len(d)-1])
+	lastCard := d[len(d)-1]
+	if lastCard.suit != "Diamonds" || lastCard.value != "King" {
+		t.Errorf("Expected first card to be King of Diamonds but got: %v", lastCard)
 	}
 }
 
