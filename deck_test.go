@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"testing"
 )
@@ -17,6 +18,7 @@ func TestNewDeck(t *testing.T) {
 		t.Errorf("Expected first card to be Ace of Spades but got: %v", firstCard)
 	}
 	lastCard := d[len(d)-1]
+	fmt.Println(lastCard.suit)
 	if lastCard.suit != "Diamonds" || lastCard.value != "King" {
 		t.Errorf("Expected first card to be King of Diamonds but got: %v", lastCard)
 	}
